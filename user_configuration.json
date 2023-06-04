@@ -1,0 +1,28 @@
+{
+    "audio": "pipewire",
+    "debug": false,
+    "hostname": "archbtw",
+    "kernels": [
+        "linux"
+    ],
+    "keyboard-language": "uk",
+    "mirror-region": "United Kingdom",
+    "nic": {
+        "dhcp": true,
+        "dns": null,
+        "gateway": null,
+        "iface": null,
+        "ip": null,
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "offline": false,
+    "script": "guided",
+    "silent": false,
+    "swap": false,
+    "ntp": true,
+    "profile": "minimal",
+    "sys-encoding": "utf-8",
+    "sys-language": "en_GB.UTF-8",
+    "timezone": "Europe/London"
+}
