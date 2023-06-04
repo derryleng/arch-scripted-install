@@ -47,19 +47,25 @@ pacman -Sy
 
 ### Run archinstall
 
-Either run the usual guided process using:
+Follow instructions.
 
 ```bash
 archinstall
 ```
 
-or use configs provided (be sure to also set disk layout and user accounts):
+Reboot after this is all finished.
+
+### Connect to internet on new system
+
+Assuming you have successfully booted into new system, start up NetworkManager and connect to the internet.
 
 ```bash
-archinstall --config https://github.com/derryleng/arch-scripted-install/blob/main/archinstall_configs.json
-```
+sudo systemctl enable NetworkManager.service
+sudo systemctl start NetworkManager.service
 
-Reboot after this is finished.
+# Now configure the networking
+nmtui
+```
 
 ### Run LARBS
 
