@@ -9,7 +9,7 @@ See the alternative manual installation [here](https://github.com/derryleng/arch
 Get the latest official Arch ISO from
 https://archlinux.org/download/.
 
-Don't bother with formatting your USB stick every time and just use [Ventoy](https://www.ventoy.net/en/doc_start.html). 
+Don't bother with formatting your USB stick every time and just use [Ventoy](https://www.ventoy.net/en/doc_start.html).
 
 If you're planning on overwriting any existing drives, back up your data.
 
@@ -47,11 +47,31 @@ pacman -Sy
 
 ### Run archinstall
 
-Follow instructions.
+I cba with config file so just run:
 
 ```bash
 archinstall
 ```
+
+Set these:
+
+- Keyboard layout: uk
+- Mirror region: United Kingdom
+- Locale language: en_GB.UTF-8
+- Locale encoding: UTF-8
+- Set drive and disk layout
+- No disk encryption
+- Bootloader: grub-install
+- Swap: False
+- Hostname: your_host_name
+- Root password: (set a password for root)
+- User account: (not essential - LARBs can create an account)
+- Profile: minimal
+- Audio: pipewire
+- Kernels: ['linux', 'linux-lts']
+- Network configuration: Use NetworkManager
+- Timezone: Europe/London
+- Automatic time sync (NTP): True
 
 Reboot after this is all finished.
 
@@ -70,5 +90,6 @@ nmtui
 ### Run LARBS
 
 ```bash
-curl -s https://github.com/derryleng/arch-scripted-install/blob/main/larbs.sh | sh -s
+curl -LO https://raw.githubusercontent.com/derryleng/arch-scripted-install/main/larbs.sh
+sudo sh larbs.sh
 ```
