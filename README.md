@@ -56,5 +56,13 @@ archinstall
 or use configs provided (be sure to also set disk layout and user accounts):
 
 ```bash
-archinstall --config https://raw.githubusercontent.com/derryleng/arch-scripted-install/user_configuration.json
+archinstall --config https://github.com/derryleng/arch-scripted-install/blob/main/archinstall_configs.json
+```
+
+Reboot after this is finished.
+
+### Run LARBS
+
+```bash
+curl -s https://github.com/derryleng/arch-scripted-install/blob/main/larbs.sh | sh -s
 ```

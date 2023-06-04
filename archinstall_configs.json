@@ -1,6 +1,6 @@
 {
     "audio": "pipewire",
-    "debug": false,
+    "bootloader": "grub-install",
     "hostname": "archbtw",
     "kernels": [
         "linux"
@@ -8,17 +8,9 @@
     "keyboard-language": "uk",
     "mirror-region": "United Kingdom",
     "nic": {
-        "dhcp": true,
-        "dns": null,
-        "gateway": null,
-        "iface": null,
-        "ip": null,
-        "type": "nm"
+        "NetworkManager": true,
+        "nic": "Use NetworkManager (necessary to configure internet graphically in GNOME and KDE)"
     },
-    "no_pkg_lookups": false,
-    "offline": false,
-    "script": "guided",
-    "silent": false,
     "swap": false,
     "ntp": true,
     "profile": "minimal",

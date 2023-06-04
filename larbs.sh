@@ -7,7 +7,7 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/derryleng/dotfiles.git"
-progsfile="https://raw.githubusercontent.com/derryleng/arch-scripted-install/progs.csv"
+progsfile="https://github.com/derryleng/arch-scripted-install/blob/main/progs.csv"
 aurhelper="yay"
 repobranch="main"
 # export TERM=ansi
