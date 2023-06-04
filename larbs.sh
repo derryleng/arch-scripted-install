@@ -195,8 +195,8 @@ putgitrepo() {
 
 clonebaredotfiles() {
 	whiptail --infobox "Cloning config files..." 7 60
-	git clone --bare "$1" "$2/.dotfiles"
-	alias dotfiles='/usr/bin/git --git-dir=$2/.dotfiles --work-tree=$2'
+	git clone --bare --single-branch --branch "$3" "$1" "$2/.dotfiles"
+	alias dotfiles='git --git-dir="$2/.dotfiles" --work-tree="$2"'
 	dotfiles config --local status.showUntrackedFiles no
 	dotfiles checkout
 }

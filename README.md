@@ -65,7 +65,7 @@ Set these:
 - Swap: False
 - Hostname: your_host_name
 - Root password: (set a password for root)
-- User account: (not essential - LARBs can create an account)
+- User account: (don't create any other accounts for now - LARBs will prompt you)
 - Profile: minimal
 - Audio: pipewire
 - Kernels: ['linux', 'linux-lts']
