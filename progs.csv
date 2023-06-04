@@ -30,7 +30,7 @@
 ,noto-fonts-emoji,"is an emoji font."
 ,ttf-font-awesome,"provides extended glyph support."
 ,ttf-dejavu,"properly displays emojis."
-,ly,"is the display manager."
+A,ly,"is the display manager."
 ,picom,"is a lightweight compositor for X11."
 ,volumeicon,"controls volume in the system tray."
 ,network-manager-applet,"applet for managing network connections."
