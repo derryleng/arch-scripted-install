@@ -397,8 +397,12 @@ fisher install IlanCosman/tide@v5
 systemctl enable tlp
 systemctl enable bluetooth.service
 systemctl enable firewalld
-systemctl enable ly
+systemctl enable sddm
 
+# Set sddm theme
+touch /etc/sddm.conf
+echo "[Theme]" >> greetings.txt
+echo "Current=TerminalStyleLogin" >> greetings.txt
 
 # Last message! Install complete!
 finalize

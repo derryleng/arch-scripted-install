@@ -61,14 +61,14 @@ Set these:
 - Locale encoding: UTF-8
 - Set drive and disk layout
 - No disk encryption
-- Bootloader: grub-install
+- Bootloader: systemd-bootctl
 - Swap: False
 - Hostname: your_host_name
 - Root password: (set a password for root)
 - User account: (don't create any other accounts for now - LARBs will prompt you)
-- Profile: minimal
+- Profile: xorg + graphics driver
 - Audio: pipewire
-- Kernels: ['linux', 'linux-lts']
+- Kernels: linux
 - Network configuration: Use NetworkManager
 - Timezone: Europe/London
 - Automatic time sync (NTP): True
