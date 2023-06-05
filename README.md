@@ -1,19 +1,23 @@
 # Arch Scripted Installation
 
-This is a minimal Arch installation for my own setup. I wrote this to keep track of the steps I have taken and it is definitely not a replacement for the far more detailed and comprehensive guide on the ArchWiki (which can be found [here](https://wiki.archlinux.org/title/Installation_guide)).
+This guide uses the archinstall script and Luke's Auto Rice Boostrapping Script (LARBS).
 
-See the alternative manual installation [here](https://github.com/derryleng/arch-manual-install).
+> See my alternative manual installation [here](https://github.com/derryleng/arch-manual-install).
+
+## Table of Contents
+
+- [Get the ISO](#get-the-iso)
+- [Install Arch](#install-arch)
+- [Connect to the internet (Wi-Fi)](#connect-to-the-internet-wi-fi)
+- [Run archinstall](#run-archinstall)
+- [Connect to internet on new system](#connect-to-internet-on-new-system)
+- [Run LARBS](#run-larbs)
 
 ## Get the ISO
 
-Get the latest official Arch ISO from
-https://archlinux.org/download/.
-
-Don't bother with formatting your USB stick every time and just use [Ventoy](https://www.ventoy.net/en/doc_start.html).
-
-If you're planning on overwriting any existing drives, back up your data.
-
-Restart your PC and boot with your USB drive for next section.
+1. Download latest [official Arch ISO](https://archlinux.org/download/).
+2. Use [Ventoy](https://www.ventoy.net/en/doc_start.html).
+3. Boot with your Ventoy USB device.
 
 ## Install Arch
 
@@ -31,23 +35,9 @@ station wlan0 get-networks
 station wlan0 connect ...YOUR_SSID...
 ```
 
-### Update mirrors and package lists
-
-Use reflector to update the fastest mirrors for pacman.
-
-```bash
-reflector --country GB --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-```
-
-Make sure package lists are up to date.
-
-```bash
-pacman -Sy
-```
-
 ### Run archinstall
 
-I cba with config file so just run:
+Assuming the script is not broken, just run:
 
 ```bash
 archinstall
@@ -61,7 +51,7 @@ Set these:
 - Locale encoding: UTF-8
 - Set drive and disk layout
 - No disk encryption
-- Bootloader: systemd-bootctl
+- Bootloader: (any)
 - Swap: False
 - Hostname: your_host_name
 - Root password: (set a password for root)
@@ -77,7 +67,7 @@ Reboot after this is all finished.
 
 ### Connect to internet on new system
 
-Assuming you have successfully booted into new system, start up NetworkManager and connect to the internet.
+Login with the new user, start NetworkManager and connect to the internet.
 
 ```bash
 sudo systemctl enable NetworkManager.service
@@ -91,5 +81,5 @@ nmtui
 
 ```bash
 curl -LO https://raw.githubusercontent.com/derryleng/arch-scripted-install/main/larbs.sh
-sudo sh larbs.sh
+sh larbs.sh
 ```
