@@ -401,8 +401,8 @@ systemctl enable sddm
 
 # Set sddm theme
 touch /etc/sddm.conf
-echo "[Theme]" >> greetings.txt
-echo "Current=TerminalStyleLogin" >> greetings.txt
+echo "[Theme]" >> /etc/sddm.conf
+echo "Current=TerminalStyleLogin" >> /etc/sddm.conf
 
 # Last message! Install complete!
 finalize
