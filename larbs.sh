@@ -195,10 +195,10 @@ putgitrepo() {
 
 clonebaredotfiles() {
 	whiptail --infobox "Cloning config files..." 7 60
+	rm "$2/.bashrc" "$2/.bash_profile" >/dev/null 2>&1
 	git clone --bare --single-branch --branch "$3" "$1" "$2/.dotfiles"
-	alias dotfiles='git --git-dir="$2/.dotfiles" --work-tree="$2"'
-	dotfiles config --local status.showUntrackedFiles no
-	dotfiles checkout
+	git --git-dir="$2/.dotfiles" --work-tree="$2" config --local status.showUntrackedFiles no
+	git --git-dir="$2/.dotfiles" --work-tree="$2" checkout
 }
 
 vimplugininstall() {
@@ -262,7 +262,8 @@ installffaddons(){
 
 finalize() {
 	whiptail --title "All done!" \
-		--msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nTo run the new graphical environment, log out and log back in as your new user, then run the command \"startx\" to start the graphical environment (it will start automatically in tty1).\\n\\n.t Luke" 13 80
+		--msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nThe system will now reboot.\\n\\n.t Luke" 13 80
+	reboot
 }
 
 ### THE ACTUAL SCRIPT ###
@@ -317,6 +318,9 @@ sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
 # Use all cores for compilation.
 sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
 
+# Clone the bare dotfiles repo in the user's home directory.
+clonebaredotfiles "$dotfilesrepo" "/home/$name" "$repobranch"
+
 manualinstall yay || error "Failed to install AUR helper."
 
 # The command that does all the installing. Reads the progs.csv file and
@@ -327,7 +331,7 @@ installationloop
 
 # Install the dotfiles in the user's home directory, but remove .git dir and
 # other unnecessary files.
-clonebaredotfiles "$dotfilesrepo" "/home/$name" "$repobranch"
+# putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 # rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 
 # Install vim plugins if not alread present.
@@ -387,22 +391,35 @@ echo "Defaults editor=/usr/bin/nvim" >/etc/sudoers.d/02-larbs-visudo-editor
 mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
-# Install fisher for fish shell
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-
-# Install tide prompt for fish shell
-fisher install IlanCosman/tide@v5
-
 # Enable services
 systemctl enable tlp
 systemctl enable bluetooth.service
 systemctl enable firewalld
 systemctl enable sddm
 
+# Get sddm theme
+git clone --single-branch https://github.com/GistOfSpirit/TerminalStyleLogin
+bash TerminalStyleLogin/scripts/build.sh
+mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
+cp -r TerminalStyleLogin/build/* /usr/share/sddm/themes/TerminalStyleLogin
+rm -rf TerminalStyleLogin
+
 # Set sddm theme
 touch /etc/sddm.conf
-echo "[Theme]" >> /etc/sddm.conf
-echo "Current=TerminalStyleLogin" >> /etc/sddm.conf
+echo "[Theme]
+Current=TerminalStyleLogin" > /etc/sddm.conf
+
+# Enter fish shell
+fish
+
+# Install fisher for fish shell
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+# Install tide prompt for fish shell
+fisher install IlanCosman/tide@v5
+
+# Exit fish shell
+exit
 
 # Last message! Install complete!
 finalize
