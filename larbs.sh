@@ -400,9 +400,9 @@ systemctl enable sddm
 # Get sddm theme
 git clone --single-branch https://github.com/GistOfSpirit/TerminalStyleLogin
 bash TerminalStyleLogin/scripts/build.sh
-mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
 sed -i 's/fontSize=[0-9]\+/fontSize=18/' TerminalStyleLogin/theme.conf
 sed -i 's/^\(.*{proxy.hostName}.*\)/\/\* \1 \*\//' TerminalStyleLogin/Main.qml
+mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
 cp -r TerminalStyleLogin/build/* /usr/share/sddm/themes/TerminalStyleLogin
 rm -rf TerminalStyleLogin
 
