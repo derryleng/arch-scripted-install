@@ -67,7 +67,7 @@ Reboot after this is all finished.
 
 ### Connect to internet on new system
 
-Login with the new user, start NetworkManager and connect to the internet.
+Login with root, start NetworkManager and connect to the internet.
 
 ```bash
 sudo systemctl enable NetworkManager.service
