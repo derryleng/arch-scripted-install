@@ -262,8 +262,7 @@ installffaddons(){
 
 finalize() {
 	whiptail --title "All done!" \
-		--msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nThe system will now reboot.\\n\\n.t Luke" 13 80
-	reboot
+		--msgbox "Congrats! Provided there were no hidden errors, the script completed successfully and all the programs and configuration files should be in place.\\n\\nA reboot is recommended.\\n\\n.t Luke" 13 80
 }
 
 ### THE ACTUAL SCRIPT ###
@@ -391,17 +390,20 @@ echo "Defaults editor=/usr/bin/nvim" >/etc/sudoers.d/02-larbs-visudo-editor
 mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
+# Last message! Install complete!
+finalize
+
 # Enable services
-systemctl enable tlp
-systemctl enable bluetooth.service
-systemctl enable firewalld
-systemctl enable sddm
+systemctl enable tlp >/dev/null 2>&1
+systemctl enable bluetooth.service >/dev/null 2>&1
+systemctl enable firewalld >/dev/null 2>&1
+systemctl enable sddm >/dev/null 2>&1
 
 # Get sddm theme
 git clone --single-branch https://github.com/GistOfSpirit/TerminalStyleLogin
 bash TerminalStyleLogin/scripts/build.sh
-sed -i 's/fontSize=[0-9]\+/fontSize=18/' TerminalStyleLogin/theme.conf
-sed -i 's/^\(.*{proxy.hostName}.*\)/\/\* \1 \*\//' TerminalStyleLogin/Main.qml
+sed -i 's/fontSize=[0-9]\+/fontSize=18/' TerminalStyleLogin/build/theme.conf
+sed -i 's/^\(.*{proxy.hostName}.*\)/\/\* \1 \*\//' TerminalStyleLogin/build/Main.qml
 mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
 cp -r TerminalStyleLogin/build/* /usr/share/sddm/themes/TerminalStyleLogin
 rm -rf TerminalStyleLogin
@@ -411,17 +413,5 @@ touch /etc/sddm.conf
 echo "[Theme]
 Current=TerminalStyleLogin" > /etc/sddm.conf
 
-# Enter fish shell
-fish
-
-# Install fisher for fish shell
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-
-# Install tide prompt for fish shell
-fisher install IlanCosman/tide@v5
-
-# Exit fish shell
-exit
-
-# Last message! Install complete!
-finalize
+# Correct ownership
+chown -R "$name" "/home/$name"
