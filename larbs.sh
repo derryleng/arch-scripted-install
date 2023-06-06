@@ -415,3 +415,6 @@ Current=TerminalStyleLogin" > /etc/sddm.conf
 
 # Correct ownership
 chown -R "$name" "/home/$name"
+
+# Set GNOME apps to use dark mode
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
