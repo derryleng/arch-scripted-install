@@ -397,21 +397,21 @@ finalize
 systemctl enable tlp >/dev/null 2>&1
 systemctl enable bluetooth.service >/dev/null 2>&1
 systemctl enable firewalld >/dev/null 2>&1
-systemctl enable sddm >/dev/null 2>&1
+systemctl enable gdm >/dev/null 2>&1
 
 # Get sddm theme
-git clone --single-branch https://github.com/GistOfSpirit/TerminalStyleLogin
-bash TerminalStyleLogin/scripts/build.sh
-sed -i 's/fontSize=[0-9]\+/fontSize=18/' TerminalStyleLogin/build/theme.conf
-sed -i 's/^\(.*{proxy.hostName}.*\)/\/\* \1 \*\//' TerminalStyleLogin/build/Main.qml
-mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
-cp -r TerminalStyleLogin/build/* /usr/share/sddm/themes/TerminalStyleLogin
-rm -rf TerminalStyleLogin
+# git clone --single-branch https://github.com/GistOfSpirit/TerminalStyleLogin
+# bash TerminalStyleLogin/scripts/build.sh
+# sed -i 's/fontSize=[0-9]\+/fontSize=18/' TerminalStyleLogin/build/theme.conf
+# sed -i 's/^\(.*{proxy.hostName}.*\)/\/\* \1 \*\//' TerminalStyleLogin/build/Main.qml
+# mkdir -p /usr/share/sddm/themes/TerminalStyleLogin
+# cp -r TerminalStyleLogin/build/* /usr/share/sddm/themes/TerminalStyleLogin
+# rm -rf TerminalStyleLogin
 
 # Set sddm theme
-touch /etc/sddm.conf
-echo "[Theme]
-Current=TerminalStyleLogin" > /etc/sddm.conf
+# touch /etc/sddm.conf
+# echo "[Theme]
+# Current=TerminalStyleLogin" > /etc/sddm.conf
 
 # Correct ownership
 chown -R "$name" "/home/$name"
